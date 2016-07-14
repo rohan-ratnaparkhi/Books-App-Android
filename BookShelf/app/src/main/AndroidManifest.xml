@@ -14,14 +14,17 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".LoginActivity"
-            android:theme="@style/LoginTheme"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/LoginTheme" />
+        <activity android:name=".ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>

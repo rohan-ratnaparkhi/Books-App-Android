@@ -11,4 +11,6 @@
     <color name="white">#ffffff</color>
     <color name="green">#00be7e</color>
     <color name="transparent">#0000</color>
+    <color name="normal_grey_text">#444444</color>
+    <color name="grey">#666666</color>
 </resources>

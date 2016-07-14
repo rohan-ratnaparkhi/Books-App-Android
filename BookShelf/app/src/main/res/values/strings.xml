@@ -6,4 +6,7 @@
     <string name="hint_password">Password</string>
     <string name="text_sign_in">Sign in</string>
     <string name="text_sign_up">Sign Up</string>
+    <string name="forgot_password_text">We will send a link on your registered \n email to reset your password</string>
+    <string name="hint_forgot_pwd_email">Enter your email ID</string>
+    <string name="text_forgot_pwd_send_email">Send Email</string>
 </resources>
