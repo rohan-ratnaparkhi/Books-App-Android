@@ -10,4 +10,7 @@
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
     <dimen name="text_size_40">40sp</dimen>
+    <dimen name="height_login_edit_text">50dp</dimen>
+    <dimen name="height_forgot_password_edit_text">45dp</dimen>
+    <dimen name="height_sign_up_edit_text">45dp</dimen>
 </resources>
