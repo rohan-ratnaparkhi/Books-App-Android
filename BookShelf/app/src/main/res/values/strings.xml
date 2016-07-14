@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">BookShelf</string>
+    <string name="font_light">font/Roboto-Light.ttf</string>
+    <string name="font_regular">font/Roboto-Regular.ttf</string>
+    <string name="hint_email">Email ID</string>
+    <string name="hint_password">Password</string>
+    <string name="text_sign_in">Sign in</string>
+    <string name="text_sign_up">Sign Up</string>
 </resources>

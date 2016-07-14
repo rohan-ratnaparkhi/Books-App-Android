@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:font="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.talentica.bookshelf.LoginActivity">
 
-    <com.talentica.bookshelf.widgets.TypefacedTextView
-        xmlns:font="http://schemas.android.com/apk/res/com.talentica.bookshelf"
+    <com.talentica.bookshelf.widgets.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
@@ -20,5 +19,76 @@
         android:layout_marginTop="53dp"
         android:textSize="@dimen/text_size_40"
         android:textColor="@color/app_title_color"
-        font:typeface="font/Roboto-Light.ttf"/>
+        font:typeface="@string/font_light"
+        android:layout_marginBottom="20dp"/>
+
+    <com.talentica.bookshelf.widgets.CustomEditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/editText"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="1dp"
+        android:paddingLeft="20dp"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/custom_edit_text"
+        android:textColorHint="@color/hint_color"
+        android:textColor="@color/edit_text_color"
+        android:hint="@string/hint_email"
+        font:typeface="@string/font_regular"/>
+
+    <com.talentica.bookshelf.widgets.CustomEditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="textPassword"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/editText"
+        android:paddingLeft="20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/custom_edit_text"
+        android:textColorHint="@color/hint_color"
+        android:textColor="@color/edit_text_color"
+        android:hint="@string/hint_password"
+        font:typeface="@string/font_regular"/>
+
+    <com.talentica.bookshelf.widgets.CustomButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/text_sign_in"
+        android:id="@+id/button"
+        android:textSize="@dimen/text_size_16"
+        android:layout_below="@+id/editText2"
+        android:textColor="@color/white"
+        android:background="@color/green"
+        android:layout_centerHorizontal="true"
+        font:typeface="@string/font_regular"/>
+
+    <com.talentica.bookshelf.widgets.CustomButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password"
+        android:id="@+id/button2"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        font:typeface="@string/font_regular"
+        android:textSize="@dimen/text_size_14"
+        android:textColor="@color/hint_color"
+        android:background="@color/transparent"
+        android:layout_alignParentTop="false"
+        android:gravity="top" />
+
+    <com.talentica.bookshelf.widgets.CustomButton
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:text="@string/text_sign_up"
+        android:id="@+id/button3"
+        font:typeface="@string/font_regular"
+        android:textSize="@dimen/text_size_16"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/hint_color"
+        android:background="@color/transparent"/>
 </RelativeLayout>

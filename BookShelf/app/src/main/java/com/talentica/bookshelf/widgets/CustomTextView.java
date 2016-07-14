@@ -11,9 +11,9 @@ import com.talentica.bookshelf.R;
 /**
  * Created by rohanr on 7/13/16.
  */
-public class TypefacedTextView extends TextView {
+public class CustomTextView extends TextView {
 
-    public TypefacedTextView(Context context, AttributeSet attrs) {
+    public CustomTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         //Typeface.createFromAsset doesn't work in the layout editor. Skipping...
@@ -21,8 +21,8 @@ public class TypefacedTextView extends TextView {
             return;
         }
 
-        TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.TypefacedTextView);
-        String fontName = styledAttrs.getString(R.styleable.TypefacedTextView_typeface);
+        TypedArray styledAttrs = context.obtainStyledAttributes(attrs, R.styleable.CustomTextStyle);
+        String fontName = styledAttrs.getString(R.styleable.CustomTextStyle_typeface);
         styledAttrs.recycle();
 
         if (fontName != null) {
