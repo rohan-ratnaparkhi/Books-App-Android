@@ -4,10 +4,12 @@
     <!-- activity labels -->
     <string name="act_forgot_password">Forgot Password</string>
     <string name="act_sign_up">Forgot Password</string>
+    <string name="act_book_details">Book Details</string>
 
     <!-- fonts -->
     <string name="font_light">font/Roboto-Light.ttf</string>
     <string name="font_regular">font/Roboto-Regular.ttf</string>
+    <string name="font_medium">font/Roboto-Medium.ttf</string>
 
     <!-- hints -->
     <string name="hint_email">Email ID</string>
@@ -22,6 +24,13 @@
     <string name="btn_text_send_email">Send Email</string>
     <string name="btn_text_forgot_password">Forgot Password</string>
 
-    <!-- texts -->
+    <!-- general texts -->
     <string name="forgot_password_text">We will send a link on your registered \n email to reset your password</string>
+    <string name="publisher">Publisher : </string>
+    <string name="isbn13">ISBN13 : </string>
+    <string name="isbn10">ISBN10 : </string>
+    <string name="edition">Edition : </string>
+    <string name="list_price">List Price : </string>
+    <string name="tags">Tags</string>
+    <string name="book_owner_comment">Book Owner Comment</string>
 </resources>

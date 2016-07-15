@@ -17,6 +17,7 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -25,13 +26,15 @@
             android:theme="@style/LoginTheme" />
         <activity
             android:name=".ForgotPasswordActivity"
-            android:parentActivityName=".LoginActivity"
-            android:label="@string/act_forgot_password"/>
+            android:label="@string/act_forgot_password"
+            android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".SignUpActivity"
-            android:parentActivityName=".LoginActivity"
-            android:label="@string/act_sign_up"/>
-
+            android:label="@string/act_sign_up"
+            android:parentActivityName=".LoginActivity" />
+        <activity
+            android:name=".BookDetailsActivity"
+            android:label="@string/act_book_details"/>
     </application>
 
 </manifest>
