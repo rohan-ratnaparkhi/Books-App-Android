@@ -23,6 +23,7 @@
     <string name="btn_text_sign_up">Sign Up</string>
     <string name="btn_text_send_email">Send Email</string>
     <string name="btn_text_forgot_password">Forgot Password</string>
+    <string name="btn_text_borrow">I Want to Borrow</string>
 
     <!-- general texts -->
     <string name="forgot_password_text">We will send a link on your registered \n email to reset your password</string>

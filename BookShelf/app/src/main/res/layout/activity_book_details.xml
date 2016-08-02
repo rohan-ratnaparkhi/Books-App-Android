@@ -262,6 +262,17 @@
             android:id="@+id/tv_book_details_owner_comment"
             android:layout_below="@+id/owner_comment_text" />
 
+        <com.talentica.bookshelf.widgets.CustomButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_text_borrow"
+            android:layout_below="@+id/tv_book_details_owner_comment"
+            font:typeface="@string/font_regular"
+            android:textSize="@dimen/text_size_16"
+            android:textColor="@color/white"
+            android:background="@color/green"
+            android:layout_marginTop="20dp"/>
+
 
     </RelativeLayout>
 
