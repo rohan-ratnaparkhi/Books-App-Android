@@ -10,7 +10,7 @@ tools:context="com.talentica.bookshelf.MainActivity">
     <LinearLayout
         android:id="@+id/bottom_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
@@ -30,6 +30,27 @@ tools:context="com.talentica.bookshelf.MainActivity">
             android:src="@drawable/icon_todo"
             android:background="@color/transparent"
             android:id="@+id/toolbar_todo"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/icon_add"
+            android:background="@color/transparent"
+            android:id="@+id/toolbar_add"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/icon_notification"
+            android:background="@color/transparent"
+            android:id="@+id/toolbar_notification"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/icon_profile"
+            android:background="@color/transparent"
+            android:id="@+id/toolbar_profile"/>
 
     </LinearLayout>
 
@@ -39,25 +60,10 @@ tools:context="com.talentica.bookshelf.MainActivity">
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:id="@+id/main_frame"
         android:layout_above="@+id/bottom_toolbar">
 
     </FrameLayout>
 
 </RelativeLayout>
 
-<!--
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.talentica.bookshelf.MainActivity">
-
-    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
-    </com.aurelhubert.ahbottomnavigation.AHBottomNavigation>
-
-</android.support.design.widget.CoordinatorLayout>-->

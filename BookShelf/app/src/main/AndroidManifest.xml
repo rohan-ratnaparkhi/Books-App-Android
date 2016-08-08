@@ -10,8 +10,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -35,7 +35,7 @@
             android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".BookDetailsActivity"
-            android:label="@string/act_book_details"/>
+            android:label="@string/act_book_details" />
     </application>
 
 </manifest>
