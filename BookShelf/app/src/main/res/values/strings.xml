@@ -64,5 +64,12 @@
     <string name="book_price">Book Price (INR)</string>
     <string name="book_binding">Binding</string>
     <string name="just_publisher">Publisher</string>
+    <string name="book_condition">Book Condition</string>
+    <string name="book_tags">Tags</string>
+    <string name="add_tags">Add tags separated by comma</string>
+    <string name="book_genre">Genre</string>
+    <string name="comment">Comments</string>
+    <string name="select">Select</string>
+    <string name="enter_comments">Add brief view about book</string>
 
 </resources>

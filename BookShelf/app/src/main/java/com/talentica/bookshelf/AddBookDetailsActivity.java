@@ -17,5 +17,7 @@ public class AddBookDetailsActivity extends AppCompatActivity {
     private void displayAddBookDetails() {
         BookDetailsManuallyFragment manualDtls = new BookDetailsManuallyFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.prev_or_new_details, manualDtls).commit();
+        RemaininBookDetailsFragment remainingDtls = new RemaininBookDetailsFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.frame_remaining_details, remainingDtls).commit();
     }
 }
