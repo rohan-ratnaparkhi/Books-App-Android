@@ -1,9 +1,12 @@
 package com.talentica.bookshelf;
 
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,12 +38,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resetToolbarIconsToDefault();
         switch (v.getId()){
             case R.id.toolbar_home:
+                displayHome();
                 nav_home.setImageResource(R.drawable.icon_home_select);
                 break;
             case R.id.toolbar_todo:
                 nav_todo.setImageResource(R.drawable.icon_todo_select);
                 break;
             case R.id.toolbar_add:
+                displayAddBook();
                 nav_add.setImageResource(R.drawable.icon_add_select);
                 break;
             case R.id.toolbar_notification:
@@ -60,4 +65,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         nav_profile.setImageResource(R.drawable.icon_profile);
     }
 
+    void displayHome(){
+        DrawerFragment homeFragment = new DrawerFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, homeFragment).commit();
+    }
+
+    void displayAddBook(){
+        AddBookFragment addBookFragment = new AddBookFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, addBookFragment).commit();
+    }
 }

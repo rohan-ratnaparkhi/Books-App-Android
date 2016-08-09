@@ -61,6 +61,7 @@ tools:context="com.talentica.bookshelf.MainActivity">
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/main_frame"
+        android:background="@color/green"
         android:layout_above="@+id/bottom_toolbar">
 
     </FrameLayout>
