@@ -3,6 +3,7 @@ package com.talentica.bookshelf;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -67,11 +68,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     void displayHome(){
         DrawerFragment homeFragment = new DrawerFragment();
+        Log.d("Rohan", "after construction");
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, homeFragment).commit();
+        Log.d("Rohan", "after transaction");
     }
 
     void displayAddBook(){
         AddBookFragment addBookFragment = new AddBookFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, addBookFragment).commit();
     }
+
 }

@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(showForgotPassword);
                 break;
             case R.id.btn_login_sign_in:
-                Intent showHomePage = new Intent(ctx, MainActivity.class);
+                Intent showHomePage = new Intent(ctx, AddBookDetailsActivity.class);
                 startActivity(showHomePage);
                 break;
             case R.id.btn_login_sign_up:

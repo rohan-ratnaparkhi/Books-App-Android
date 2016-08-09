@@ -36,6 +36,7 @@
         <activity
             android:name=".BookDetailsActivity"
             android:label="@string/act_book_details" />
+        <activity android:name=".AddBookDetailsActivity"></activity>
     </application>
 
 </manifest>

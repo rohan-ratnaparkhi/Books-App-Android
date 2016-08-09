@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 /**
  * Created by rohanr on 8/9/16.
  */
-public class AddBookFragment extends Fragment {
+public class BookDetailsManuallyFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.add_book_option, container, false);
+        return inflater.inflate(R.layout.add_book_details_manually, container, false);
     }
-
 }
