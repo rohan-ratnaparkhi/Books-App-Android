@@ -71,5 +71,6 @@
     <string name="comment">Comments</string>
     <string name="select">Select</string>
     <string name="enter_comments">Add brief view about book</string>
+    <string name="title_activity_new_main">NewMainActivity</string>
 
 </resources>
