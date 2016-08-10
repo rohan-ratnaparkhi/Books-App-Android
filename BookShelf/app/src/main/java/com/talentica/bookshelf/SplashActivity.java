@@ -11,23 +11,28 @@ import android.support.v7.app.AppCompatActivity;
  */
 public class SplashActivity extends AppCompatActivity  {
     Context ctx;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         ctx = this;
+        Intent intent;
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(ctx, LoginActivity.class);
+
+        if(validStoredCredentials()) {
+            intent = new Intent(ctx, NewMainActivity.class);
+        } else {
+            intent = new Intent(ctx, LoginActivity.class);
+        }
+
         startActivity(intent);
         finish();
 
-//        final Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(ctx, LoginActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        }, 5000);
-
     }
+
+    private boolean validStoredCredentials() {
+//        check the stored credentials if available with server
+
+        return false;
+    }
+
 }

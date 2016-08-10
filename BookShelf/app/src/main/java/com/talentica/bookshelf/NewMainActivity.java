@@ -38,13 +38,7 @@ public class NewMainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-
-        Menu nvMenu = navigationView.getMenu();
-        MenuItem totalCat = nvMenu.findItem(R.id.book_categories);
-        totalCat.setTitle("Categories (31)");
-
         navigationView.setNavigationItemSelectedListener(this);
-
 
         nav_home = (ImageButton) findViewById(R.id.toolbar_home);
         nav_todo = (ImageButton) findViewById(R.id.toolbar_todo);
@@ -122,14 +116,12 @@ public class NewMainActivity extends AppCompatActivity
         resetToolbarIconsToDefault();
         switch (v.getId()){
             case R.id.toolbar_home:
-//                displayHome();
                 nav_home.setImageResource(R.drawable.icon_home_select);
                 break;
             case R.id.toolbar_todo:
                 nav_todo.setImageResource(R.drawable.icon_todo_select);
                 break;
             case R.id.toolbar_add:
-//                displayAddBook();
                 nav_add.setImageResource(R.drawable.icon_add_select);
                 break;
             case R.id.toolbar_notification:
