@@ -2,9 +2,12 @@ package com.talentica.bookshelf;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by rohanr on 7/11/16.
@@ -30,8 +33,9 @@ public class SplashActivity extends AppCompatActivity  {
     }
 
     private boolean validStoredCredentials() {
-//        check the stored credentials if available with server
-
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.user_profile), Context.MODE_PRIVATE);
+        String uToken = sharedPref.getString(Constants.USER_TOKEN, "");
+        //TODO - check username n password with server and act accordingly
         return false;
     }
 

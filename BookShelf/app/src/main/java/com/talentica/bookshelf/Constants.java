@@ -11,4 +11,6 @@ public class Constants {
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     public static final String INVALID_CREDENTIALS = "Invalid username / password";
+
+    public static final String USER_TOKEN = "uToken";
 }

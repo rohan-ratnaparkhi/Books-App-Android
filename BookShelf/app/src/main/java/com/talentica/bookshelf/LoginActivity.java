@@ -2,6 +2,7 @@ package com.talentica.bookshelf;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -86,8 +90,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(ctx, response, Toast.LENGTH_LONG).show();
+                        if(isSuccessResponse(response)){
+                            try {
+                                storeUserCredentials(response);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            displayHomePage();
+                        } else {
+                            Toast.makeText(ctx, "Some error occurred", Toast.LENGTH_LONG).show();
+                        }
 
-                        displayHomePage();
                     }
                 },
                 new Response.ErrorListener() {
@@ -109,6 +122,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         requestQueue.add(stringRequest);
     }
 
+    private void storeUserCredentials(String response) throws JSONException {
+        JSONObject res = new JSONObject(response);
+        //TODO - store username and password
+        String uToken = res.getString("data");
+        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.user_profile), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(Constants.USER_TOKEN, uToken);
+        editor.commit();
+    }
+
+    private boolean isSuccessResponse(String response){
+        //TODO - validate if response is as per expectation or not
+        return true;
+    }
+
     private boolean isPasswordInvalid(String pwd) {
         if(pwd.equalsIgnoreCase("")){
             return true;
@@ -124,7 +152,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void displayHomePage(){
-        //store user credentials
         Intent showHomePage = new Intent(ctx, NewMainActivity.class);
         startActivity(showHomePage);
     }
