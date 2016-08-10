@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Toast.makeText(ctx, response, Toast.LENGTH_LONG).show();
                         if(isSuccessResponse(response)){
                             try {
-                                storeUserCredentials(response);
+                                storeUserCredentials(response, username, pwd);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -122,13 +122,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         requestQueue.add(stringRequest);
     }
 
-    private void storeUserCredentials(String response) throws JSONException {
+    private void storeUserCredentials(String response, String username, String pwd) throws JSONException {
         JSONObject res = new JSONObject(response);
-        //TODO - store username and password
         String uToken = res.getString("data");
         SharedPreferences sharedPref = getSharedPreferences(getString(R.string.user_profile), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(Constants.USER_TOKEN, uToken);
+        editor.putString(Constants.KEY_USERNAME, username);
+        editor.putString(Constants.KEY_PASSWORD, pwd);
         editor.commit();
     }
 
