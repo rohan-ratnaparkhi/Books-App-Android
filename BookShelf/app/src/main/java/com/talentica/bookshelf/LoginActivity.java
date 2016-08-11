@@ -29,6 +29,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Context ctx;
+    SharedPreferences sharedPref;
 
     EditText emailId;
     EditText password;
@@ -57,6 +58,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         bSignUp.setOnClickListener(this);
         bForgotPwd.setOnClickListener(this);
 
+        initializeSharedPreferences();
+        checkForStoredUser();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkForStoredUser();
     }
 
     @Override
@@ -78,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void checkUserLogin() {
         final String username = emailId.getText().toString().trim();
-        final String pwd = password.getText().toString().trim();
+        final String pwd = password.getText().toString();
 
         if(isUsernameInvalid(username) || isPasswordInvalid(pwd)) {
             Toast.makeText(ctx, "Please enter valid username & password", Toast.LENGTH_LONG).show();
@@ -125,7 +134,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void storeUserCredentials(String response, String username, String pwd) throws JSONException {
         JSONObject res = new JSONObject(response);
         String uToken = res.getString("data");
-        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.user_profile), Context.MODE_PRIVATE);
+
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(Constants.USER_TOKEN, uToken);
         editor.putString(Constants.KEY_USERNAME, username);
@@ -159,5 +168,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void displayLoginError(){
         Toast.makeText(ctx, Constants.INVALID_CREDENTIALS, Toast.LENGTH_LONG).show();
+    }
+
+    private void checkForStoredUser(){
+        String username = sharedPref.getString(Constants.KEY_USERNAME, "");
+        String uPwd;
+        if(!username.equalsIgnoreCase("")){
+            uPwd = sharedPref.getString(Constants.KEY_PASSWORD, "");
+        } else {
+            return;
+        }
+        emailId.setText(username);
+        password.setText(uPwd);
+        checkUserLogin();
+    }
+
+    private void initializeSharedPreferences() {
+        sharedPref = getSharedPreferences(getString(R.string.user_profile), Context.MODE_PRIVATE);
     }
 }
