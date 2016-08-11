@@ -26,4 +26,5 @@
     <dimen name="margin_10">10dp</dimen>
     <dimen name="padding_20">20dp</dimen>
     <dimen name="padding_2">2dp</dimen>
+    <dimen name="app_action_buttons">48dp</dimen>
 </resources>

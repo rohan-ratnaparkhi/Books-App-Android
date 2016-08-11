@@ -10,7 +10,6 @@ public class AddBookDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book_details);
 
-//        Temporary Remove this Rohan
         displayAddBookDetails();
     }
 

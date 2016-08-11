@@ -164,6 +164,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void displayHomePage(){
         Intent showHomePage = new Intent(ctx, NewMainActivity.class);
         startActivity(showHomePage);
+        finish();
     }
 
     private void displayLoginError(){

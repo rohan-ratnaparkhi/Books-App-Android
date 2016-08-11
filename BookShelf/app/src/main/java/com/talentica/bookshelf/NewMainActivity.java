@@ -3,6 +3,7 @@ package com.talentica.bookshelf;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+
+//TODO - replacing previous fragments not add them on each other
 
 public class NewMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -51,6 +54,8 @@ public class NewMainActivity extends AppCompatActivity
         nav_add.setOnClickListener(this);
         nav_notification.setOnClickListener(this);
         nav_profile.setOnClickListener(this);
+
+        displayHome();
     }
 
     @Override
@@ -92,23 +97,15 @@ public class NewMainActivity extends AppCompatActivity
         int id = item.getItemId();
         Log.d("Rohan", "nav clicked");
 
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
+        displaySelectedGenreBooks(item);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void displaySelectedGenreBooks(MenuItem item) {
+//                TODO - get list of books of this genre and display in gridview
     }
 
     @Override
@@ -116,13 +113,14 @@ public class NewMainActivity extends AppCompatActivity
         resetToolbarIconsToDefault();
         switch (v.getId()){
             case R.id.toolbar_home:
-                nav_home.setImageResource(R.drawable.icon_home_select);
+                displayHome();
                 break;
             case R.id.toolbar_todo:
                 nav_todo.setImageResource(R.drawable.icon_todo_select);
                 break;
             case R.id.toolbar_add:
                 nav_add.setImageResource(R.drawable.icon_add_select);
+                displayAddBook();
                 break;
             case R.id.toolbar_notification:
                 nav_notification.setImageResource(R.drawable.icon_notification_select);
@@ -131,6 +129,20 @@ public class NewMainActivity extends AppCompatActivity
                 nav_profile.setImageResource(R.drawable.icon_profile_select);
                 break;
         }
+    }
+
+    private void displayHome() {
+        HomeFragment home = new HomeFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_container, home).commit();
+        nav_home.setImageResource(R.drawable.icon_home_select);
+    }
+
+    private void displayAddBook() {
+        AddBookFragment addBookFragment = new AddBookFragment();
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.main_container, addBookFragment).commit();
     }
 
 
