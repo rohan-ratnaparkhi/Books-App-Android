@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -72,6 +74,9 @@ public class NewMainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.new_main, menu);
+        final MenuItem item = menu.findItem(R.id.search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setIconifiedByDefault(false);
         return true;
     }
 
@@ -137,6 +142,8 @@ public class NewMainActivity extends AppCompatActivity
                 .beginTransaction()
                 .replace(R.id.main_container, home).commit();
         nav_home.setImageResource(R.drawable.icon_home_select);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     private void displayAddBook() {
