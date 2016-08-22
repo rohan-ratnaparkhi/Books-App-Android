@@ -24,7 +24,6 @@ public class AddBookDetailsActivity extends AppCompatActivity implements View.On
 
     Button cancelAction;
     Button submitAction;
-    String validationMsg;
 
     EditText bookTitle;
     EditText bookAuthor;
@@ -32,12 +31,15 @@ public class AddBookDetailsActivity extends AppCompatActivity implements View.On
     EditText isbn10;
     EditText bookPublisher;
     EditText bookPrice;
-    Spinner binding;
     EditText tags;
     EditText bookComments;
-    Spinner genre;
+
     RadioGroup condition;
 
+    Spinner binding;
+    Spinner genre;
+
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,14 +75,11 @@ public class AddBookDetailsActivity extends AppCompatActivity implements View.On
     }
 
     private void saveBook() {
-        this.validationMsg = "";
         setFields();
         if(bookDetailsValid()){
             JSONObject bookDtls = getBookDetailsObject();
 //            TODO - JSONObjectRequest to save new book details
 
-        } else {
-            Toast.makeText(this, this.validationMsg, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -149,6 +148,42 @@ public class AddBookDetailsActivity extends AppCompatActivity implements View.On
 
     private boolean bookDetailsValid() {
 //        TODO - validate all the book details entered
-        return true;
+        boolean validDtls = true;
+        if(isEditTextEmpty(bookTitle)){
+            bookTitle.setError("Book name is mandatory");
+            validDtls = false;
+        }
+        if(isEditTextEmpty(bookAuthor)){
+            bookAuthor.setError("Author name is mandatory");
+            validDtls = false;
+        }
+//        TODO - any one isbn entered is ok; currently checking for both
+        if(isEditTextEmpty(isbn13)){
+            isbn13.setError("ISBN 13 is mandatory");
+            validDtls = false;
+        }
+        if(isEditTextEmpty(isbn10)){
+            isbn10.setError("ISBN 10 is mandatory");
+            validDtls = false;
+        }
+        if(isEditTextEmpty(tags)){
+            tags.setError("Tags are mandatory");
+            validDtls = false;
+        }
+//        TODO - binding and genre spinner item validations
+        int radioId = condition.getCheckedRadioButtonId();
+        if(radioId == -1){
+            Toast.makeText(this, "Condition of book is mandatory", Toast.LENGTH_LONG).show();
+            validDtls = false;
+        }
+        return validDtls;
+    }
+
+    private boolean isEditTextEmpty(EditText et){
+        if(et.getText().toString().length() == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
