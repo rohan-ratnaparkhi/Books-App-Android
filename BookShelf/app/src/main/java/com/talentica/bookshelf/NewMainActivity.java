@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 //TODO - replacing previous fragments not add them on each other
 
@@ -144,6 +145,7 @@ public class NewMainActivity extends AppCompatActivity
         nav_home.setImageResource(R.drawable.icon_home_select);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
     }
 
     private void displayAddBook() {

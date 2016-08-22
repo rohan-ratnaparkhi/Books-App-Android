@@ -1,5 +1,7 @@
 package com.talentica.bookshelf;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,14 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,12 +28,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddBookDetailsActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button cancelAction;
     Button submitAction;
+
+    Context ctx;
 
     EditText bookTitle;
     EditText bookAuthor;
@@ -39,11 +53,15 @@ public class AddBookDetailsActivity extends AppCompatActivity implements View.On
     Spinner binding;
     Spinner genre;
 
-    
+    SharedPreferences sharedPref;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book_details);
+
+        ctx = this;
 
         cancelAction = (Button) findViewById(R.id.btn_add_book_cancel);
         submitAction = (Button) findViewById(R.id.btn_add_book_submit);
@@ -52,6 +70,7 @@ public class AddBookDetailsActivity extends AppCompatActivity implements View.On
         submitAction.setOnClickListener(this);
 
         displayAddBookDetails();
+        initializeSharedPreferences();
     }
 
     private void displayAddBookDetails() {
@@ -79,7 +98,34 @@ public class AddBookDetailsActivity extends AppCompatActivity implements View.On
         if(bookDetailsValid()){
             JSONObject bookDtls = getBookDetailsObject();
 //            TODO - JSONObjectRequest to save new book details
-
+            JsonObjectRequest saveBookRequest = new JsonObjectRequest(
+                    Request.Method.POST,
+                    Constants.BASE_URL + Constants.ADD_BOOK_API,
+                    bookDtls,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Toast.makeText(ctx, "Book Added Successfully", Toast.LENGTH_LONG).show();
+                            Log.d("Rohan", response.toString());
+                            finish();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(ctx, "error", Toast.LENGTH_LONG).show();
+                            Log.d("Rohan", error.toString());
+                        }
+                    }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<String, String>();
+                    headers.put("Authorization", Constants.AUTH_PREPEND + sharedPref.getString(Constants.USER_TOKEN, ""));
+                    return headers;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(saveBookRequest);
         }
     }
 
@@ -185,5 +231,9 @@ public class AddBookDetailsActivity extends AppCompatActivity implements View.On
         } else {
             return false;
         }
+    }
+
+    private void initializeSharedPreferences() {
+        sharedPref = getSharedPreferences(getString(R.string.user_profile), Context.MODE_PRIVATE);
     }
 }

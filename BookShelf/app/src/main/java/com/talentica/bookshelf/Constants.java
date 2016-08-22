@@ -10,6 +10,10 @@ public class Constants {
     public static final String USER_LOGIN_API = "/authenticate/login";
     public static final String USER_SIGN_UP_API = "/user";
     public static final String USER_FORGOT_PWD_API= "/authenticate/forgot-password/";
+    public static final String ADD_BOOK_API = "/book";
+    public static final String RECENTLY_ADDED_API = "/book/reports/most-read";
+    public static final String MOST_READ_API = "/book/reports/most-read";
+    public static final String AUTH_PREPEND = "Bearer ";
 
 //    keys for json and internal usage
     public static final String KEY_USERNAME = "username";
