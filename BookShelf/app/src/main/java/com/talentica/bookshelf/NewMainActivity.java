@@ -74,9 +74,9 @@ public class NewMainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.new_main, menu);
-        final MenuItem item = menu.findItem(R.id.search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setIconifiedByDefault(false);
+//        final MenuItem item = menu.findItem(R.id.search);
+//        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+//        searchView.setIconifiedByDefault(false);
         return true;
     }
 

@@ -43,19 +43,51 @@
             </LinearLayout>
 
             <!-- Rohan need to display custom radio buttons -->
-            <com.talentica.bookshelf.widgets.CustomEditText
-                android:id="@+id/ab_book_condition"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_login_edit_text"
-                android:layout_marginTop="@dimen/margin_10"
-                android:background="@drawable/custom_edit_text"
-                android:hint="@string/enter_title"
-                android:paddingLeft="@dimen/padding_10"
-                android:textColor="@color/edit_text_color"
-                android:textColorHint="@color/hint_color"
-                android:textSize="@dimen/text_size_14"
-                font:typeface="@string/font_regular" />
+            <!--<com.talentica.bookshelf.widgets.CustomEditText-->
+                <!--android:id="@+id/ab_book_condition"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/height_login_edit_text"-->
+                <!--android:layout_marginTop="@dimen/margin_10"-->
+                <!--android:background="@drawable/custom_edit_text"-->
+                <!--android:hint="@string/enter_title"-->
+                <!--android:paddingLeft="@dimen/padding_10"-->
+                <!--android:textColor="@color/edit_text_color"-->
+                <!--android:textColorHint="@color/hint_color"-->
+                <!--android:textSize="@dimen/text_size_14"-->
+                <!--font:typeface="@string/font_regular" />-->
 
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/ab_book_condition">
+                <RadioButton
+                    android:id="@+id/ab_cond_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@android:color/transparent"
+                    android:text="@string/condition_new"
+                    android:drawableLeft="@drawable/custom_radio_button"
+                    android:drawablePadding="@dimen/radio_drawable_padding"/>
+                <RadioButton
+                    android:id="@+id/ab_cond_good"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/custom_radio_button"
+                    android:button="@android:color/transparent"
+                    android:text="@string/condition_good"
+                    android:layout_marginLeft="@dimen/radio_button_margin"
+                    android:drawablePadding="@dimen/radio_drawable_padding"/>
+                <RadioButton
+                    android:id="@+id/ab_cond_poor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/custom_radio_button"
+                    android:button="@android:color/transparent"
+                    android:text="@string/condition_poor"
+                    android:layout_marginLeft="@dimen/radio_button_margin"
+                    android:drawablePadding="@dimen/radio_drawable_padding"/>
+            </RadioGroup>
 
 
 
@@ -120,18 +152,26 @@
             </LinearLayout>
 
             <!-- Rohan need to change to custom spinner -->
-            <com.talentica.bookshelf.widgets.CustomEditText
-                android:id="@+id/ab_book_genre"
+            <!--<com.talentica.bookshelf.widgets.CustomSpinner-->
+                <!--android:id="@+id/ab_book_genre"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/height_login_edit_text"-->
+                <!--android:layout_marginTop="@dimen/margin_10"-->
+                <!--android:background="@drawable/custom_edit_text"-->
+                <!--android:hint="@string/select"-->
+                <!--android:paddingLeft="@dimen/padding_10"-->
+                <!--android:textColor="@color/edit_text_color"-->
+                <!--android:textColorHint="@color/hint_color"-->
+                <!--android:textSize="@dimen/text_size_14"-->
+                <!--font:typeface="@string/font_regular" />-->
+
+            <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_login_edit_text"
-                android:layout_marginTop="@dimen/margin_10"
-                android:background="@drawable/custom_edit_text"
-                android:hint="@string/select"
-                android:paddingLeft="@dimen/padding_10"
-                android:textColor="@color/edit_text_color"
-                android:textColorHint="@color/hint_color"
-                android:textSize="@dimen/text_size_14"
-                font:typeface="@string/font_regular" />
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_book_genre"
+                >
+
+            </Spinner>
 
 
                 <com.talentica.bookshelf.widgets.CustomTextView
@@ -167,5 +207,6 @@
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
+
 
 </LinearLayout>

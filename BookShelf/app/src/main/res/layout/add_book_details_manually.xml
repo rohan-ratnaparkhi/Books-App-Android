@@ -225,19 +225,23 @@
                     android:textColor="@color/red" />
             </LinearLayout>
 
-            <com.talentica.bookshelf.widgets.CustomEditText
-                android:id="@+id/ab_binding"
+            <!--<com.talentica.bookshelf.widgets.CustomEditText-->
+                <!--android:id="@+id/ab_binding"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/height_login_edit_text"-->
+                <!--android:layout_marginTop="@dimen/margin_10"-->
+                <!--android:background="@drawable/custom_edit_text"-->
+                <!--android:hint="@string/enter_isbn13"-->
+                <!--android:paddingLeft="@dimen/padding_10"-->
+                <!--android:textSize="@dimen/text_size_14"-->
+                <!--android:textColor="@color/edit_text_color"-->
+                <!--android:textColorHint="@color/hint_color"-->
+                <!--font:typeface="@string/font_regular" />-->
+<!-- TODO - custom spinner background with arrow -->
+            <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_login_edit_text"
-                android:layout_marginTop="@dimen/margin_10"
-                android:background="@drawable/custom_edit_text"
-                android:hint="@string/enter_isbn13"
-                android:paddingLeft="@dimen/padding_10"
-                android:textSize="@dimen/text_size_14"
-                android:textColor="@color/edit_text_color"
-                android:textColorHint="@color/hint_color"
-                font:typeface="@string/font_regular" />
-
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_binding"></Spinner>
 
             <com.talentica.bookshelf.widgets.CustomTextView
                 android:layout_width="wrap_content"

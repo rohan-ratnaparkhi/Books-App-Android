@@ -76,6 +76,7 @@
     <string name="enter_comments">Add brief view about book</string>
     <string name="title_activity_new_main">NewMainActivity</string>
     <string name="t_science_fiction">Science Fiction</string>
-
-
+    <string name="condition_new">New</string>
+    <string name="condition_good">Good</string>
+    <string name="condition_poor">Poor</string>
 </resources>
