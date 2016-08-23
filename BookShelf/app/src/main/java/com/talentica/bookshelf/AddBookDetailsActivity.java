@@ -120,7 +120,7 @@ public class AddBookDetailsActivity extends AppCompatActivity implements View.On
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<String, String>();
-                    headers.put("Authorization", Constants.AUTH_PREPEND + sharedPref.getString(Constants.USER_TOKEN, ""));
+                    headers.put(Constants.KEY_AUTHORIZATION, Constants.AUTH_PREPEND + sharedPref.getString(Constants.USER_TOKEN, ""));
                     return headers;
                 }
             };

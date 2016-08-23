@@ -31,11 +31,10 @@
             android:id="@+id/btn_view_all"
             android:background="@color/transparent"
             android:padding="5dp"
-            android:text="View All >"
+            android:text="@string/view_all"
             font:typeface="@string/font_medium"
             android:textSize="@dimen/text_size_12"
             android:textColor="@color/hint_color"
-            android:elevation="0dp"
             style="?android:attr/borderlessButtonStyle"
             />
     </LinearLayout>

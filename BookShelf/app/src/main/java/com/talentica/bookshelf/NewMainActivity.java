@@ -1,10 +1,14 @@
 package com.talentica.bookshelf;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +23,24 @@ import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.talentica.bookshelf.Adapter.HomeListAdapter;
+import com.talentica.bookshelf.model.Book;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 //TODO - replacing previous fragments not add them on each other
 
 public class NewMainActivity extends AppCompatActivity
@@ -29,6 +51,15 @@ public class NewMainActivity extends AppCompatActivity
     ImageButton nav_add;
     ImageButton nav_notification;
     ImageButton nav_profile;
+    RecyclerView rv_recently_added;
+    RecyclerView rv_most_read;
+    Context c;
+
+    SharedPreferences sharedPref;
+
+    ArrayList<Book> recentlyAdded;
+    ArrayList<Book> mostRead;
+    HomeListAdapter homeListAdapter1, homeListAdapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +73,8 @@ public class NewMainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        c = this;
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -58,7 +91,23 @@ public class NewMainActivity extends AppCompatActivity
         nav_notification.setOnClickListener(this);
         nav_profile.setOnClickListener(this);
 
+        sharedPref = getSharedPreferences(getString(R.string.user_profile), Context.MODE_PRIVATE);
+
         displayHome();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        rv_recently_added = (RecyclerView) findViewById(R.id.main_container).findViewById(R.id.recently_added_books).findViewById(R.id.rv_list_of_books);
+        rv_most_read = (RecyclerView) findViewById(R.id.main_container).findViewById(R.id.most_read_books).findViewById(R.id.rv_list_of_books);
+//      TODO - replace urls when they work properly for most read and recently added
+//        presently writing dummy logic for this
+        recentlyAdded = new ArrayList<Book>();
+        mostRead = new ArrayList<Book>();
+        displayBooksList(Constants.BASE_URL + Constants.ALL_BOOKS_API, listType.RECENTLY_ADDED);
+
     }
 
     @Override
@@ -117,7 +166,7 @@ public class NewMainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         resetToolbarIconsToDefault();
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.toolbar_home:
                 displayHome();
                 break;
@@ -155,11 +204,145 @@ public class NewMainActivity extends AppCompatActivity
     }
 
 
-    void resetToolbarIconsToDefault(){
+    void resetToolbarIconsToDefault() {
         nav_home.setImageResource(R.drawable.icon_home);
         nav_todo.setImageResource(R.drawable.icon_todo);
         nav_add.setImageResource(R.drawable.icon_add);
         nav_notification.setImageResource(R.drawable.icon_notification);
         nav_profile.setImageResource(R.drawable.icon_profile);
+    }
+
+    enum listType {
+        RECENTLY_ADDED,
+        MOST_READ
+    }
+
+    private void displayBooksList(String urlToUse, final listType type) {
+        try {
+            JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET,
+                    urlToUse,
+                    null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d("Rohan",  "1: " + response.toString());
+                            createListFromResponse(response, type);
+                            setAdapterForBooks(type);
+                            displayMostReadBooksList(Constants.BASE_URL + Constants.ALL_BOOKS_API, listType.MOST_READ);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("Rohan", error.toString());
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(Constants.KEY_PAGE, "1");
+                    return params;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<String, String>();
+                    headers.put(Constants.KEY_AUTHORIZATION, Constants.AUTH_PREPEND + sharedPref.getString(Constants.USER_TOKEN, ""));
+                    return headers;
+                }
+            };
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(req);
+        } catch (Exception e) {
+            Log.d("Rohan", e.toString());
+        }
+    }
+
+    private void displayMostReadBooksList(String urlToUse, final listType type) {
+        try {
+            JsonObjectRequest req2 = new JsonObjectRequest(Request.Method.GET,
+                    urlToUse,
+                    null,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d("Rohan", "2: " + response.toString());
+                            createListFromResponse(response, type);
+                            setAdapterForBooks(type);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("Rohan", error.toString());
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(Constants.KEY_PAGE, "2");
+                    return params;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<String, String>();
+                    headers.put(Constants.KEY_AUTHORIZATION, Constants.AUTH_PREPEND + sharedPref.getString(Constants.USER_TOKEN, ""));
+                    return headers;
+                }
+            };
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(req2);
+        } catch (Exception e) {
+            Log.d("Rohan", e.toString());
+        }
+    }
+
+
+
+
+    private void setAdapterForBooks(listType type) {
+        if (type == listType.RECENTLY_ADDED && recentlyAdded.size() > 0) {
+            homeListAdapter1 = new HomeListAdapter(c, recentlyAdded);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(c, LinearLayoutManager.HORIZONTAL, false);
+            rv_recently_added.setLayoutManager(mLayoutManager);
+            rv_recently_added.setAdapter(homeListAdapter1);
+        } else if(type == listType.MOST_READ && mostRead.size() > 0){
+            homeListAdapter2 = new HomeListAdapter(c, mostRead);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(c, LinearLayoutManager.HORIZONTAL, false);
+            rv_most_read.setLayoutManager(mLayoutManager);
+            rv_most_read.setAdapter(homeListAdapter2);
+        }
+    }
+
+    private void createListFromResponse(JSONObject response, listType type) {
+        try {
+
+            JSONObject data = response.getJSONObject("data");
+            JSONArray books = data.getJSONArray("docs");
+            for (int i = 0; i < books.length(); i++) {
+                JSONObject bk = books.getJSONObject(i);
+                JSONObject publisher = bk.getJSONObject("publisher");
+                JSONArray authors = bk.getJSONArray("authors");
+                JSONObject author = authors.getJSONObject(0);
+                Book book = new Book();
+                book.setBookName(bk.getString("name"));
+                book.setLenderName(publisher.getString("name"));
+                book.setAuthorName(author.getString("name"));
+                book.setBookId(bk.getString("_id"));
+                if(type == listType.MOST_READ){
+                    mostRead.add(book);
+                    Log.d("Rohan", "type = 2");
+                } else if(type == listType.RECENTLY_ADDED){
+                    recentlyAdded.add(book);
+                    Log.d("Rohan", "type = 1");
+                }
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

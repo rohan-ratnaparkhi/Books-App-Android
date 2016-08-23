@@ -11,9 +11,12 @@ public class Constants {
     public static final String USER_SIGN_UP_API = "/user";
     public static final String USER_FORGOT_PWD_API= "/authenticate/forgot-password/";
     public static final String ADD_BOOK_API = "/book";
+    public static final String ALL_BOOKS_API = "/books";
     public static final String RECENTLY_ADDED_API = "/book/reports/most-read";
     public static final String MOST_READ_API = "/book/reports/most-read";
     public static final String AUTH_PREPEND = "Bearer ";
+    public static final String GET_BOOK_BY_ID = "/book/{id}";
+
 
 //    keys for json and internal usage
     public static final String KEY_USERNAME = "username";
@@ -23,6 +26,9 @@ public class Constants {
     public static final String KEY_ROLES = "roles";
     public static final String USER_TOKEN = "uToken";
     public static final String APP_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI1N2FhZTUyNzc3ZWJjMzY5MzVhYzVlYTAiLCJpYXQiOjE0NzA4OTM0NDcsImV4cCI6MTQ3MDk3OTg0NywiaXNzIjoiZWMyLTUyLTM4LTE3NC02OC51cy13ZXN0LTIuY29tcHV0ZS5hbWF6b25hd3MuY29tIn0.OGpcou4Le31kVlH0L3imDpOwiLkP8AWXtscbjRYkFxw";
+    public static final String KEY_PAGE = "page";
+    public static final String KEY_LIMIT = "limit";
+    public static final String KEY_AUTHORIZATION = "Authorization";
 
     //    messages
     public static final String INVALID_CREDENTIALS = "Invalid username / password";

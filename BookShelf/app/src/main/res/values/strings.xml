@@ -13,6 +13,7 @@
     <string name="font_light">font/Roboto-Light.ttf</string>
     <string name="font_regular">font/Roboto-Regular.ttf</string>
     <string name="font_medium">font/Roboto-Medium.ttf</string>
+    <string name="font_bold">font/Roboto-Bold.ttf</string>
 
     <!-- hints -->
     <string name="hint_email">Email ID</string>
@@ -81,4 +82,9 @@
     <string name="condition_poor">Poor</string>
     <string name="recently_added_title">Recently Added</string>
     <string name="most_read_title">Most Read</string>
+    <string name="view_all"><![CDATA[View All >]]></string>
+    <string name="text_binding">Binding :&#160;</string>
+    <string name="text_condition">Condition :&#160;</string>
+    <string name="text_genre">Genre :&#160;</string>
+    <string name="text_published">Published :&#160;</string>
 </resources>

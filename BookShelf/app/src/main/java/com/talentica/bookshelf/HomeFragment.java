@@ -24,12 +24,12 @@ public class HomeFragment extends Fragment {
     private void loadMostReadBooks() {
         MostReadBooksFragment mostRead = new MostReadBooksFragment();
         FragmentManager manager = this.getFragmentManager();
-        manager.beginTransaction().add(R.id.recently_added_books, mostRead).commit();
+        manager.beginTransaction().add(R.id.most_read_books, mostRead).commit();
     }
 
     private void loadRecentlyAddedBooks() {
         RecentlyAddedBooksFragment recentBooks = new RecentlyAddedBooksFragment();
         FragmentManager manager = this.getFragmentManager();
-        manager.beginTransaction().add(R.id.most_read_books, recentBooks).commit();
+        manager.beginTransaction().add(R.id.recently_added_books, recentBooks).commit();
     }
 }
