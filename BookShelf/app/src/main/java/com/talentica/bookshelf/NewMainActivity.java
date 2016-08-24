@@ -100,6 +100,7 @@ public class NewMainActivity extends AppCompatActivity
     protected void onStart() {
         super.onStart();
 
+//        TODO - check this as these are null on actual device
         rv_recently_added = (RecyclerView) findViewById(R.id.main_container).findViewById(R.id.recently_added_books).findViewById(R.id.rv_list_of_books);
         rv_most_read = (RecyclerView) findViewById(R.id.main_container).findViewById(R.id.most_read_books).findViewById(R.id.rv_list_of_books);
 //      TODO - replace urls when they work properly for most read and recently added

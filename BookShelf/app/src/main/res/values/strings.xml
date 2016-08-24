@@ -87,4 +87,6 @@
     <string name="text_condition">Condition :&#160;</string>
     <string name="text_genre">Genre :&#160;</string>
     <string name="text_published">Published :&#160;</string>
+    <string name="snack_error_bg">#de6d5d</string>
+    <string name="snack_success_bg">#00be7d</string>
 </resources>

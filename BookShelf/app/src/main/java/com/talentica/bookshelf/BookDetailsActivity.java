@@ -3,13 +3,19 @@ package com.talentica.bookshelf;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -137,7 +143,7 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
             publisher.setText(data.getJSONObject("publisher").getString("name"));
             String dtStart = "2010-10-15T09:27:37Z";
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            SimpleDateFormat toDisplayFormat = new SimpleDateFormat("MMM YYYY");
+            SimpleDateFormat toDisplayFormat = new SimpleDateFormat("MMM yyyy");
             try {
                 Date date = format.parse(dtStart);
                 publishedOn.setText(toDisplayFormat.format(date));
@@ -191,6 +197,17 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                         dialog.dismiss();
                     }
                 });
+                Window window = dialog.getWindow();
+//                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+                WindowManager.LayoutParams wlp = window.getAttributes();
+
+                wlp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                wlp.gravity = Gravity.BOTTOM;
+                wlp.dimAmount = (float) 0.3;
+
+//                this avoids dimming the background when dialog appears on screen
+//                wlp.flags &= ~WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+                window.setAttributes(wlp);
                 dialog.show();
                 break;
         }
@@ -206,12 +223,14 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                         @Override
                         public void onResponse(String response) {
                             Log.d("Rohan", response.toString());
+                            displayResponseSnack("Your request has been successfully sent.", "success");
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.d("Rohan", error.toString() + "---" + error.getLocalizedMessage());
+                            displayResponseSnack("Your request could not be proceeded. Please try later.", "error");
                         }
                     }) {
 
@@ -235,5 +254,22 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         } catch (Exception e) {
             Log.d("Rohan", "error occurred: " + e.getMessage());
         }
+    }
+
+    private void displayResponseSnack(String msg, String type) {
+        Snackbar snack = Snackbar.make(findViewById(R.id.book_dtls_layout), msg, Snackbar.LENGTH_LONG);
+        View view = snack.getView();
+        FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        if(type.equalsIgnoreCase("error")){
+            view.setBackgroundColor(Color.parseColor(getString(R.string.snack_error_bg)));
+        } else if (type.equalsIgnoreCase("success")){
+            view.setBackgroundColor(Color.parseColor(getString(R.string.snack_success_bg)));
+        }
+
+//                            TextView textView = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+//                            textView.setTextColor("#ffffff");
+        view.setLayoutParams(params);
+        snack.show();
     }
 }

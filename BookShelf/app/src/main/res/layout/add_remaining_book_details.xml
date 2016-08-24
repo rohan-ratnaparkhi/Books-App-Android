@@ -8,9 +8,9 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        font:cardBackgroundColor="@android:color/white"
-        font:cardElevation="2dp"
-        font:cardUseCompatPadding="true">
+        android:elevation="@dimen/card_elevation"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_10">
 
         <LinearLayout
             android:layout_width="match_parent"
