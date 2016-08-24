@@ -29,6 +29,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.talentica.bookshelf.Adapter.HomeListAdapter;
 import com.talentica.bookshelf.model.Book;
@@ -162,7 +163,48 @@ public class NewMainActivity extends AppCompatActivity
 
     private void displaySelectedGenreBooks(MenuItem item) {
 //                TODO - get list of books of this genre and display in gridview
+        StringRequest req = new StringRequest(Request.Method.GET,
+                Constants.BASE_URL + Constants.ALL_BOOKS_API,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("Rohan", response.toString());
 
+                        displayBooksGrid(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Rohan", error.toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("limit", "50");
+                params.put("page", "1");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put(Constants.KEY_AUTHORIZATION, Constants.AUTH_PREPEND + sharedPref.getString(Constants.USER_TOKEN, ""));
+                return headers;
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(req);
+    }
+
+    private void displayBooksGrid(String response) {
+        try {
+            JSONObject json = new JSONObject(response);
+            
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -227,7 +269,7 @@ public class NewMainActivity extends AppCompatActivity
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.d("Rohan",  "1: " + response.toString());
+                            Log.d("Rohan", "1: " + response.toString());
                             createListFromResponse(response, type);
                             setAdapterForBooks(type);
                             displayMostReadBooksList(Constants.BASE_URL + Constants.ALL_BOOKS_API, listType.MOST_READ);
@@ -303,15 +345,13 @@ public class NewMainActivity extends AppCompatActivity
     }
 
 
-
-
     private void setAdapterForBooks(listType type) {
         if (type == listType.RECENTLY_ADDED && recentlyAdded.size() > 0) {
             homeListAdapter1 = new HomeListAdapter(c, recentlyAdded);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(c, LinearLayoutManager.HORIZONTAL, false);
             rv_recently_added.setLayoutManager(mLayoutManager);
             rv_recently_added.setAdapter(homeListAdapter1);
-        } else if(type == listType.MOST_READ && mostRead.size() > 0){
+        } else if (type == listType.MOST_READ && mostRead.size() > 0) {
             homeListAdapter2 = new HomeListAdapter(c, mostRead);
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(c, LinearLayoutManager.HORIZONTAL, false);
             rv_most_read.setLayoutManager(mLayoutManager);
@@ -334,10 +374,10 @@ public class NewMainActivity extends AppCompatActivity
                 book.setLenderName(publisher.getString("name"));
                 book.setAuthorName(author.getString("name"));
                 book.setBookId(bk.getString("_id"));
-                if(type == listType.MOST_READ){
+                if (type == listType.MOST_READ) {
                     mostRead.add(book);
                     Log.d("Rohan", "type = 2");
-                } else if(type == listType.RECENTLY_ADDED){
+                } else if (type == listType.RECENTLY_ADDED) {
                     recentlyAdded.add(book);
                     Log.d("Rohan", "type = 1");
                 }

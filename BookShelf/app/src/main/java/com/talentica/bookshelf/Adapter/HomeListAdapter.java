@@ -2,7 +2,6 @@ package com.talentica.bookshelf.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +32,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.home_list_item, parent, false);
+                .inflate(R.layout.item_recent_most_read_list, parent, false);
 
         return new MyViewHolder(itemView);
     }

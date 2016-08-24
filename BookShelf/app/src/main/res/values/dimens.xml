@@ -33,4 +33,5 @@
     <dimen name="card_elevation">5dp</dimen>
     <dimen name="margin_25">25dp</dimen>
     <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
 </resources>
