@@ -15,4 +15,5 @@
     <color name="grey">#666666</color>
     <color name="gradient_start_login">#ffffff</color>
     <color name="gradient_end_login">#dddddd</color>
+    <color name="green_text">#2bb432</color>
 </resources>

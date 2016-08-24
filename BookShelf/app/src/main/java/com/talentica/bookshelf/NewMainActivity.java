@@ -161,6 +161,7 @@ public class NewMainActivity extends AppCompatActivity
 
     private void displaySelectedGenreBooks(MenuItem item) {
 //                TODO - get list of books of this genre and display in gridview
+
     }
 
     @Override

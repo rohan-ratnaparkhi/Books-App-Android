@@ -16,6 +16,7 @@ public class Constants {
     public static final String MOST_READ_API = "/book/reports/most-read";
     public static final String AUTH_PREPEND = "Bearer ";
     public static final String GET_BOOK_BY_ID = "/book/{id}";
+    public static final String BORROW_BOOK_API = "/book/request/{id}";
 
 
 //    keys for json and internal usage
