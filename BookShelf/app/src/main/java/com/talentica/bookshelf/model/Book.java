@@ -8,14 +8,14 @@ public class Book {
     private String authorName;
     private String bookId;
     private String lenderName;
-    private String bookImage;
+    private String bookImageUrl;
 
-    public String getBookImage() {
-        return bookImage;
+    public String getBookImageUrl() {
+        return bookImageUrl;
     }
 
-    public void setBookImage(String bookImage) {
-        this.bookImage = bookImage;
+    public void setBookImageUrl(String bookImageUrl) {
+        this.bookImageUrl = bookImageUrl;
     }
 
     public String getAuthorName() {

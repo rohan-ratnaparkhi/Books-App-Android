@@ -10,12 +10,13 @@
         android:layout_width="140dp"
         android:layout_height="180dp"
         android:background="@color/grey"
-        android:id="@+id/imageView2"
+        android:id="@+id/home_book_img"
         android:layout_marginTop="@dimen/margin_15"
         android:layout_gravity="center_horizontal"/>
     <com.talentica.bookshelf.widgets.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/home_book_title"
         android:text="Book Title"
         android:layout_marginTop="@dimen/margin_8"
         android:gravity="center_horizontal"
@@ -26,6 +27,7 @@
     <com.talentica.bookshelf.widgets.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/home_book_author"
         android:text="Author"
         android:layout_marginTop="@dimen/margin_8"
         android:gravity="center_horizontal"
@@ -36,6 +38,7 @@
     <com.talentica.bookshelf.widgets.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/home_book_lender"
         android:text="Lender"
         android:layout_marginTop="@dimen/margin_15"
         android:layout_marginBottom="@dimen/margin_15"

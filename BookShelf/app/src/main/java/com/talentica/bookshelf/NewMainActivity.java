@@ -55,6 +55,7 @@ public class NewMainActivity extends AppCompatActivity
     RecyclerView rv_recently_added;
     RecyclerView rv_most_read;
     Context c;
+    ArrayList<Book> bookList;
 
     SharedPreferences sharedPref;
 
@@ -200,8 +201,27 @@ public class NewMainActivity extends AppCompatActivity
 
     private void displayBooksGrid(String response) {
         try {
+            bookList = new ArrayList<Book>();
             JSONObject json = new JSONObject(response);
-            
+            JSONObject data = json.getJSONObject("data");
+            JSONArray allBooks = data.getJSONArray("docs");
+            for(int i=0; i<allBooks.length(); i++){
+                JSONObject bookObj = allBooks.getJSONObject(i);
+                Book book = new Book();
+                book.setBookId(bookObj.getString("_id"));
+                book.setBookName(bookObj.getString("name"));
+                JSONArray authors = bookObj.getJSONArray("authors");
+                if(authors.length() > 0){
+                    JSONObject author = authors.getJSONObject(0);
+                    book.setAuthorName(author.getString("name"));
+                }
+                book.setLenderName(bookObj.getJSONObject("publisher").getString("name"));
+                book.setBookImageUrl("https://upload.wikimedia.org/wikipedia/en/5/59/Hulk_(comics_character).png");
+                bookList.add(book);
+            }
+            if(bookList.size() > 0){
+
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
